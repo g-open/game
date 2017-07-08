@@ -1,4 +1,4 @@
-package com.game.game.controller.login;
+package cn.g_open.game.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

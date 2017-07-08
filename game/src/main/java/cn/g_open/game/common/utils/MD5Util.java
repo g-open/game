@@ -1,4 +1,4 @@
-package com.game.game.common.utils;
+package cn.g_open.game.common.utils;
 
 import java.security.MessageDigest;
 
