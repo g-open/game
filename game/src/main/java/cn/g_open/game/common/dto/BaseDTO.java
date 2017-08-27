@@ -1,25 +1,34 @@
 package cn.g_open.game.common.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BaseDTO
-{
-    private String dataStatus;
-    
-    private String createBy;
-    
-    private Date createDate;
-    
-    private String updateBy;
-    
-    private Date updateDate;
+import cn.g_open.game.common.utils.ConstUtil;
 
-    public String getDataStatus()
+public class BaseDTO implements Serializable
+{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    private int dataStatus = 1;
+    
+    private String createBy = ConstUtil.sysName;
+    
+    private Date createDate = new Date();
+    
+    private String updateBy = ConstUtil.sysName;
+    
+    private Date updateDate = new Date();
+
+
+    public int getDataStatus()
     {
         return dataStatus;
     }
 
-    public void setDataStatus(String dataStatus)
+    public void setDataStatus(int dataStatus)
     {
         this.dataStatus = dataStatus;
     }

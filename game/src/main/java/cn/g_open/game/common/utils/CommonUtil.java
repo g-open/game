@@ -2,6 +2,7 @@ package cn.g_open.game.common.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,5 +32,10 @@ public class CommonUtil
                 writer.close();
             }
         }
+    }
+    
+    public static String getUUID()
+    {
+        return UUID.randomUUID().toString().toUpperCase().replace("-", "");
     }
 }
