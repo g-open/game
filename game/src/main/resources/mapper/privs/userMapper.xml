@@ -1,0 +1,62 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="cn.g_open.game.privs.mapper.UserMapper">
+
+   <select id="selectUserInfo" parameterType="java.util.Map" resultType="cn.g_open.game.privs.dto.UserDTO">
+      select  
+         user_id   userid, 
+         user_name username, 
+         password password ,
+         email email,
+         phone phone
+      from ga_user_info t 
+      where t.data_status = 1
+      <if test="userid != null and userid != ''">
+          and t.user_id = #{userid}
+      </if>
+      <if test="password != null and password != ''">
+          and t.password = #{password}
+      </if>
+   </select>
+   
+   <insert id="insertUserInfo" parameterType="cn.g_open.game.privs.dto.UserDTO" >
+      insert into ga_user_info(
+        user_id,
+		user_name,
+		password,
+		email,
+		phone,
+		data_status,
+		create_by,
+		create_date,
+		update_by,
+		update_date
+      )values(
+        #{userid},
+		#{username},
+		#{password},
+		#{email},
+		#{phone},
+		#{dataStatus},
+		#{createBy},
+		#{createDate},
+		#{updateBy},
+		#{updateDate}
+      )
+   </insert>
+   
+   <select id="selectUserRole" parameterType="java.util.Map" resultType="cn.g_open.game.privs.dto.RoleDTO">
+      select  
+         role_id   roleid, 
+         role_name rolename, 
+         role_type  roletype 
+      from ga_role_info t 
+      where t.data_status = 1
+      exists (select ur.role_id from ga_user_role ur  where ur.data_status = 1 and ur.user_id = #{userid})
+      <if test="roletype != null and roletype != ''">
+          and t.role_type = #{roletype}
+      </if>
+   </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\Users\Fred\.m2\repository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar" />
+	<context id="net_worm">
+		<plugin type="org.mybatis.generator.plugins.AddLimitOffsetPlugin" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/game" userId="gjh"
+			password="P@55w0rd" />
+		<javaModelGenerator targetPackage="cn.g_open.game.db.model"
+			targetProject="game/database" />
+		<sqlMapGenerator targetPackage="cn.g_open.game.db.mapper"
+			targetProject="game/database" />
+		<javaClientGenerator targetPackage="cn.g_open.game.db.mapper"
+			targetProject="game/database" type="XMLMAPPER" />
+		<table schema="game" tableName="accountInfo" domainObjectName="accountInfo">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+			<columnOverride column="createDate" jdbcType="TIMESTAMP"/>
+			<columnOverride column="modifyDate" jdbcType="TIMESTAMP"/>
+		</table>
+	</context>
+</generatorConfiguration>
