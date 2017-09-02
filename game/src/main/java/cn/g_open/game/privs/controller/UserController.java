@@ -34,6 +34,7 @@ public class UserController
     public void login(HttpServletRequest request,HttpServletResponse response) throws IOException{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String rememberMe = request.getParameter("rememberMe");
         ResultDTO result = new ResultDTO();
         if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password))
         {
@@ -43,7 +44,10 @@ public class UserController
         }
         Subject  subject = SecurityUtils.getSubject();
         Md5Hash md5 = new Md5Hash(password,username);
-        UsernamePasswordToken token = new UsernamePasswordToken(username, md5.toHex(), true);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, md5.toHex());
+        if(!StringUtils.isEmpty(rememberMe) && rememberMe.equals("on")){
+            token.setRememberMe(true);
+        }
         try{
             subject.login(token);
             response.sendRedirect(ConstUtil.INDEX_VIEW);

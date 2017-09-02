@@ -1,5 +1,6 @@
 ;(function () {
     $("#signUpFrom").submit(function(){
+    	var error = true;
 	    $.ajax({
 		    type: 'post',
 		    url: '/user/register.do',
@@ -13,9 +14,11 @@
 		    	var errMsg = data.responseJSON.errors[0].defaultMessage;
 		    	$('#alertMsg').html(errMsg);
 		    	$('#alertMsg').show();
-		    	return false;
+		    	error = false;
+		    	return error;
 		    }
 		});
+		return false;
 	})
 
 }());

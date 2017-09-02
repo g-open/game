@@ -43,13 +43,14 @@ public class ShiroConfiguration {
         bean.setFilters(filters);
         //配置访问权限
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
-        filterChainDefinitionMap.put("/loginUser", "anon"); 
-        filterChainDefinitionMap.put("/logout*","anon");
-        filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
-        filterChainDefinitionMap.put("/jsp/index.jsp*","authc");
-        //filterChainDefinitionMap.put("/*", "authc");//表示需要认证才可以访问
-        filterChainDefinitionMap.put("/**", "myShiroFilter");//表示需要认证才可以访问
+        filterChainDefinitionMap.put("/login.html", "anon"); //表示可以匿名访问
+        filterChainDefinitionMap.put("/user/**", "anon"); 
+        filterChainDefinitionMap.put("/html/login/**","anon");
+        filterChainDefinitionMap.put("/css/**","anon");
+        filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/images/**","anon");
+        filterChainDefinitionMap.put("/**", "user");//表示需要认证才可以访问
+       // filterChainDefinitionMap.put("/**", "myShiroFilter");//表示需要认证才可以访问
         //filterChainDefinitionMap.put("/*.*", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
@@ -59,6 +60,7 @@ public class ShiroConfiguration {
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         DefaultWebSecurityManager manager=new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
+       // manager.setRememberMeManager(rememberMeManager);
         return manager;
     }
     //配置自定义的权限登录器

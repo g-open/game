@@ -51,6 +51,9 @@ public class AuthRealm extends AuthorizingRealm{
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("userid", utoken.getUsername());
         UserDTO user = userService.selectUserInfo(map);
+        if(null == user){
+            return null;
+        }
         return new SimpleAuthenticationInfo(user,user.getPassword(),getName());
     }
    
