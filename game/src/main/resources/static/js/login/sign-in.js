@@ -15,12 +15,13 @@
 		    	    return error;
 		    	}
 		    	$('#alertMsg').hide();
+		    	window.location.href=data.data.url+"?username="+data.data.username;
 		    	return true;
 		    },
 		    error:function(data){
-		    	var errMsg = data.responseJSON.errors[0].defaultMessage;
-		    	$('#alertMsg').html(errMsg);
-		    	$('#alertMsg').show();
+//		    	var errMsg = data.responseJSON.errors[0].defaultMessage;
+//		    	$('#alertMsg').html(errMsg);
+//		    	$('#alertMsg').show();
 		    	error = false;
 		    	return error;
 		    }

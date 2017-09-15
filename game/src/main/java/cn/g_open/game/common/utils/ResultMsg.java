@@ -6,7 +6,11 @@ public enum ResultMsg
     
     FAIL_MSG("999999","系统错误"),
     
+    ERR_LOGIN_PASSWORD("000002","用户名或密码错误"),
+    
     ERR_LOGIN_EMPTY("000001","用户名或密码为空");
+    
+    
     
     private String code;
    

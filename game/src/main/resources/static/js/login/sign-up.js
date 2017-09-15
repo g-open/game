@@ -5,9 +5,13 @@
 		    type: 'post',
 		    url: '/user/register.do',
 		    async: 'false',
+		    dataType:"json",
 		    data: $("#signUpFrom").serialize(),
 		    success: function(data) {
-		    	$('#alertMsg').hide();
+		    	if(data.code == "000000"){
+		    	   $('#alertMsg').hide();
+		    	   window.location.href=data.data.url;
+		    	}
 		    	return true;
 		    },
 		    error:function(data){

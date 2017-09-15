@@ -1,6 +1,8 @@
 package cn.g_open.game.privs.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,11 +52,13 @@ public class UserController
         }
         try{
             subject.login(token);
-            response.sendRedirect(ConstUtil.INDEX_VIEW);
-            return;
         }catch(Exception e){
-            result.setResultMsg(ResultMsg.ERR_LOGIN_EMPTY);
+            result.setResultMsg(ResultMsg.ERR_LOGIN_PASSWORD);
         }
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("url", ConstUtil.INDEX_VIEW);
+        resultMap.put("username", username);
+        result.setData(resultMap);
         CommonUtil.responseMsg(response, result);
     }
     
@@ -71,7 +75,10 @@ public class UserController
         Md5Hash md5 = new Md5Hash(userDTO.getPassword(),userDTO.getUsername());
         userDTO.setPassword(md5.toHex());
         userService.insertUserInfo(userDTO);
-        response.sendRedirect(ConstUtil.LOGIN_VIEW);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("url", ConstUtil.LOGIN_VIEW);
+        result.setData(resultMap);
+        CommonUtil.responseMsg(response, result);
     }
     
 }
